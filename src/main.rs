@@ -3,6 +3,8 @@ use std::env::args;
 use std::fs::read_to_string;
 use std::io::Result;
 
+mod ast;
+
 lalrpop_mod!(sysy);
 
 fn main() -> Result<()> {
@@ -15,6 +17,7 @@ fn main() -> Result<()> {
 
     let ast = sysy::CompUnitParser::new().parse(&input).unwrap();
 
-    std::fs::write(output, ast.as_bytes())?;
+    // std::fs::write(output, ast.as_bytes())?;
+    std::fs::write(output, format!("{:#?}", ast).as_bytes())?;
     Ok(())
 }
